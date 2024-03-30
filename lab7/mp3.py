@@ -5,7 +5,6 @@ pygame.init()
 screen=pygame.display.set_mode((300,300))
 list=[]
 num=0
-stop=False
 work=True 
 work2=True
 dir=os.listdir(r"lab7\music")
@@ -33,20 +32,24 @@ while work:
                 if event.key==pygame.K_d:
                     if num==len(list)-1:
                         num=0
+                        work2=False
                     else:
                         num+=1
+                        work2=False
                 if event.key==pygame.K_a:
                     if num==0:
                         num=len(list)-1
+                        work2=False
                     else:
                         num-=1  
+                        work2=False
                 if event.key==pygame.K_SPACE:
-                    stop=not stop
-                    if stop==True:
+                    if pygame.mixer.music.get_busy():
                         pygame.mixer.music.pause()
-                    elif stop==False:
+                    else:
                         pygame.mixer.music.unpause()
-                if not  stop:
-                    work2=False
+                if event.key==pygame.K_l:
+                    print(pygame.mixer.music.get_busy())
+
 
     
